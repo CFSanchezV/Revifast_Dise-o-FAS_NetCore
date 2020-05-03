@@ -18,18 +18,20 @@ namespace Revifast.Models
         public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Reserva> Reserva { get; set; }
         public virtual DbSet<Vehiculo> Vehiculo { get; set; }
-
         public virtual DbSet<Conductor> Conductor { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=DbFASGugz;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=DbRevifastFASGugz;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+
             modelBuilder.Entity<Empresa>(entity =>
             {
                 entity.Property(e => e.Direccion)
@@ -67,7 +69,7 @@ namespace Revifast.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Reserva_Vehiculo")
                     .OnDelete(DeleteBehavior.ClientCascade);
-                    //REVISAR AQUI^^
+                //REVISAR AQUI^^
             });
 
             modelBuilder.Entity<Vehiculo>(entity =>

@@ -31,10 +31,10 @@ namespace Revifast
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
             var connection = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<DbRevifastContext>(options => options.UseSqlServer(connection));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

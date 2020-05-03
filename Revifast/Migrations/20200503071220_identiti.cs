@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Revifast.Migrations
 {
-    public partial class agregarIdentity : Migration
+    public partial class identiti : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

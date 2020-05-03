@@ -27,7 +27,7 @@ namespace Revifast.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<IdentityUser>().ToTable("Usuario").Property(p => p.Id).HasColumnName("UsuarioId");
-            
+
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("RolUsuario");
             modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("LoginUsuario");
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("ClaimUsuario");

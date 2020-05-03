@@ -10,14 +10,14 @@ using Revifast.Data;
 namespace Revifast.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200419194903_agregarIdentity")]
-    partial class agregarIdentity
+    [Migration("20200503071220_identiti")]
+    partial class identiti
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

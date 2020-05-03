@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -49,18 +48,14 @@ namespace Revifast.Controllers
         // GET: Reservas/Create
         public IActionResult Create()
         {
-                                                                                        //REVISAR AQUI
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre");
-
-            //ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "Usuario");
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo.Include(c=>c.Conductor).Where(v => v.Conductor.Usuario == User.Identity.Name).ToList(), "VehiculoId", "Placa");
-
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId");
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId");
             return View();
         }
 
-
-        //REVISAR AQUI
         // POST: Reservas/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ReservaId,VehiculoId,EmpresaId,Fecha,Observaciones")] Reserva reserva)
@@ -71,11 +66,8 @@ namespace Revifast.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre", reserva.EmpresaId);
-
-            //ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "Usuario", reserva.VehiculoId);
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo.Include(c=>c.Conductor).Where(v => v.Conductor.Usuario == User.Identity.Name).ToList(), "VehiculoId", "Placa", reserva.VehiculoId);
-
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId", reserva.EmpresaId);
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId", reserva.VehiculoId);
             return View(reserva);
         }
 
@@ -92,8 +84,8 @@ namespace Revifast.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre", reserva.EmpresaId);
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo.Include(c => c.Conductor).Where(v => v.Conductor.Usuario == User.Identity.Name).ToList(), "VehiculoId", "Placa", reserva.VehiculoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId", reserva.EmpresaId);
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId", reserva.VehiculoId);
             return View(reserva);
         }
 
@@ -129,8 +121,8 @@ namespace Revifast.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre", reserva.EmpresaId);
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo.Include(c => c.Conductor).Where(v => v.Conductor.Usuario == User.Identity.Name).ToList(), "VehiculoId", "Placa", reserva.VehiculoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId", reserva.EmpresaId);
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId", reserva.VehiculoId);
             return View(reserva);
         }
 

@@ -16,7 +16,7 @@ namespace Revifast.Models
         [Display(Name = "Conductor")]
         public int? ConductorId { get; set; }
 
-        
+
         [StringLength(30, MinimumLength = 6, ErrorMessage = "Entre 6 y 30 caracteres")]
         public string Placa { get; set; }
 

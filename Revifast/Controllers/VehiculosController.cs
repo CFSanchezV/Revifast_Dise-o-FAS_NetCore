@@ -47,14 +47,16 @@ namespace Revifast.Controllers
         // GET: Vehiculos/Create
         public IActionResult Create()
         {
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "Nombres");
+            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId");
             return View();
         }
 
         // POST: Vehiculos/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConductorId,VehiculoId,Placa,Modelo,Categoria")] Vehiculo vehiculo)
+        public async Task<IActionResult> Create([Bind("VehiculoId,ConductorId,Placa,Modelo,Categoria")] Vehiculo vehiculo)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +64,7 @@ namespace Revifast.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "Nombres", vehiculo.ConductorId);
+            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId", vehiculo.ConductorId);
             return View(vehiculo);
         }
 
@@ -79,14 +81,16 @@ namespace Revifast.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "Nombres", vehiculo.ConductorId);
+            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId", vehiculo.ConductorId);
             return View(vehiculo);
         }
 
         // POST: Vehiculos/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConductorId,VehiculoId,Placa,Modelo,Categoria")] Vehiculo vehiculo)
+        public async Task<IActionResult> Edit(int id, [Bind("VehiculoId,ConductorId,Placa,Modelo,Categoria")] Vehiculo vehiculo)
         {
             if (id != vehiculo.VehiculoId)
             {
@@ -113,7 +117,7 @@ namespace Revifast.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "Nombres", vehiculo.ConductorId);
+            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId", vehiculo.ConductorId);
             return View(vehiculo);
         }
 
