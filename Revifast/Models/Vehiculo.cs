@@ -13,17 +13,16 @@ namespace Revifast.Models
 
         public int VehiculoId { get; set; }
 
-        [Display(Name = "Conductor")]
         public int? ConductorId { get; set; }
+        [Required(ErrorMessage = "Placa es requerido")]
 
-
-        [StringLength(30, MinimumLength = 6, ErrorMessage = "Entre 6 y 30 caracteres")]
+        [StringLength(6, MinimumLength = 6,ErrorMessage = "Placa requiere 6 caracteres")]
         public string Placa { get; set; }
-
-        [StringLength(30, MinimumLength = 5, ErrorMessage = "Ingrese Marca y Modelo")]
+        [Required(ErrorMessage = "Modelo es requerido")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Modelo requiere entre 3 y 30 caracteres")]
         public string Modelo { get; set; }
-
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "Entre 3 y 10 caracteres")]
+        [Required(ErrorMessage = "Categoria es requerido")]
+        [StringLength(2, MinimumLength = 2,ErrorMessage = "Categoria requiere 2 caracteres")]
         public string Categoria { get; set; }
 
 

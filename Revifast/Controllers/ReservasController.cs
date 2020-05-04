@@ -48,8 +48,11 @@ namespace Revifast.Controllers
         // GET: Reservas/Create
         public IActionResult Create()
         {
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId");
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId");
+
+            var conductor = _context.Conductor.FirstOrDefault(c => c.Usuario == User.Identity.Name);
+            var vehiculos = _context.Vehiculo.Where(v => v.ConductorId == conductor.ConductorId);
+            ViewData["VehiculoId"] = new SelectList(vehiculos, "VehiculoId", "Placa");
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre");
             return View();
         }
 

@@ -1,65 +1,40 @@
-﻿@model IEnumerable<Revifast.Models.Conductor>
+﻿@model Revifast.Models.Conductor
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Mi Cuenta";
 }
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Registrar Datos</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombres)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellidos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Correo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Celular)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellidos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Celular)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ConductorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ConductorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ConductorId">Delete</a>
-            </td>
-        </tr>
+
+@if (Model == null)
+{
+    <p>
+        Usted no ha registado sus datos, para realizarlo ingrese aquí <a asp-action="Create">Registrar Datos</a>
+    </p>
 }
-    </tbody>
-</table>
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombres)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Nombres)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.ConductorId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@Model.ConductorId">Ver detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.ConductorId">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

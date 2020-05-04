@@ -21,8 +21,10 @@ namespace Revifast.Controllers
         // GET: Vehiculos
         public async Task<IActionResult> Index()
         {
-            var dbRevifastContext = _context.Vehiculo.Include(v => v.Conductor);
-            return View(await dbRevifastContext.ToListAsync());
+            var conductor = await _context.Conductor.FirstOrDefaultAsync(c=>c.Usuario == User.Identity.Name);
+            var vehiculos = await _context.Vehiculo.Where(v=>v.ConductorId == conductor.ConductorId).ToListAsync();
+            //var dbRevifastContext = _context.Vehiculo.Include(v => v.Conductor);
+            return View(vehiculos);
         }
 
         // GET: Vehiculos/Details/5
@@ -47,7 +49,9 @@ namespace Revifast.Controllers
         // GET: Vehiculos/Create
         public IActionResult Create()
         {
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId");
+            Conductor conductor = _context.Conductor.FirstOrDefault(u => u.Usuario == User.Identity.Name);
+            ViewData["ConductorId"] = conductor.ConductorId;
+            ViewData["ConductorNombres"] = conductor.Nombres;
             return View();
         }
 

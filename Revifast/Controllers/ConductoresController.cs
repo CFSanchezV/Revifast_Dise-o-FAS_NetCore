@@ -21,7 +21,8 @@ namespace Revifast.Controllers
         // GET: Conductores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Conductor.ToListAsync());
+            Conductor conductor = _context.Conductor.FirstOrDefault(u => u.Usuario == User.Identity.Name);
+            return View(conductor);
         }
 
         // GET: Conductores/Details/5
