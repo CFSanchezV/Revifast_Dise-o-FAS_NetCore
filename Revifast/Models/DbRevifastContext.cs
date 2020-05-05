@@ -24,7 +24,7 @@ namespace Revifast.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=DbRevifastFASGugz;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=.;Database=DbRevifastFASGugz;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
 

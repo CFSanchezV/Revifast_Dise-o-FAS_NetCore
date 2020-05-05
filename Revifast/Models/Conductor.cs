@@ -24,7 +24,7 @@ namespace Revifast.Models
         public string Dni { get; set; }
         public string Correo { get; set; }
         [Required(ErrorMessage = "Celular es requerido")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "Celular requiere 9 caracteres")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Celular requiere 9 caracteres")]
         [DataType(DataType.PhoneNumber)]
         public string Celular { get; set; }
 

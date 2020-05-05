@@ -56,7 +56,8 @@ namespace Revifast.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ConductorId,Usuario,Nombres,Apellidos,Dni,Correo,Celular")] Conductor conductor)
         {
-            if (ModelState.IsValid)
+            var other = _context.Conductor.FirstOrDefault(u=>u.Usuario == conductor.Usuario);
+            if (ModelState.IsValid && other == null)
             {
                 _context.Add(conductor);
                 await _context.SaveChangesAsync();
@@ -64,7 +65,6 @@ namespace Revifast.Controllers
             }
             return View(conductor);
         }
-
         // GET: Conductores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -145,9 +145,14 @@ namespace Revifast.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ConductorExists(int id)
+        public bool ConductorExists(int id)
         {
             return _context.Conductor.Any(e => e.ConductorId == id);
+        }
+        // For test
+        public Conductor GetConductor(int id)
+        {
+            return _context.Conductor.FirstOrDefault(e => e.ConductorId == id);
         }
     }
 }
