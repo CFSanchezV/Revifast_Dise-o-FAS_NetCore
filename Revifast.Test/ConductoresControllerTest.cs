@@ -2,15 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Revifast.Controllers;
-using Revifast.Data;
 using Revifast.Models;
 using System;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
+using Moq;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Revifast.Test
 {
+
+
+
     [TestClass]
     public class ConductoresControllerTest
     {
@@ -28,9 +29,59 @@ namespace Revifast.Test
 
         public ConductoresControllerTest()
         {
+            var objectValidator = new Mock<IObjectModelValidator>();
+            objectValidator.Setup(o => o.Validate(It.IsAny<ActionContext>(),
+                                              It.IsAny<ValidationStateDictionary>(),
+                                              It.IsAny<string>(),
+                                              It.IsAny<Object>()));
             conductorController = new ConductoresController(context);
+            conductorController.ObjectValidator = objectValidator.Object;
         }
 
+        #region unit test
+        [TestMethod]
+        public void ValidarConductorDni()
+        {
+            var testConductor = new Conductor()
+            {
+                ConductorId = 123,
+                Usuario = "test_user",
+                Nombres = "conductor_nombre",
+                Apellidos = "conductor_apellido",
+                Dni = "12345678",
+                Correo = "correo_conductor",
+                Celular = "123456789"
+            };
+            Assert.IsTrue(testConductor.IsDniValid());
+            testConductor.Dni = "1234567";
+            Assert.IsFalse(testConductor.IsDniValid());
+            testConductor.Dni = "123456789";
+            Assert.IsFalse(testConductor.IsDniValid());
+        }
+
+        [TestMethod]
+        public void ValidarConductorCelular()
+        {
+            var testConductor = new Conductor()
+            {
+                ConductorId = 123,
+                Usuario = "test_user",
+                Nombres = "conductor_nombre",
+                Apellidos = "conductor_apellido",
+                Dni = "12345678",
+                Correo = "correo_conductor",
+                Celular = "123456789"
+            };
+            Assert.IsTrue(testConductor.IsPhoneValid());
+            testConductor.Celular = "12345678";
+            Assert.IsFalse(testConductor.IsPhoneValid());
+            testConductor.Celular = "1234567891";
+            Assert.IsFalse(testConductor.IsPhoneValid());
+        }
+
+        #endregion  unit test
+
+        #region integration test
         [TestMethod]
         public void CreateConductor()
         {
@@ -79,6 +130,6 @@ namespace Revifast.Test
             resultDeleteConfirmed.Wait();
             Assert.IsTrue(resultDeleteConfirmed.IsCompletedSuccessfully);
         }
-
+        #endregion integration test
     }
 }
