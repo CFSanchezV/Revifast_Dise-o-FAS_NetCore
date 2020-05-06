@@ -17,7 +17,6 @@ namespace Revifast.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
@@ -25,7 +24,6 @@ namespace Revifast.Areas.Identity.Pages.Account
             ILogger<LoginModel> logger,
             UserManager<IdentityUser> userManager)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }

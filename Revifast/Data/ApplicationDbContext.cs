@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,18 +20,18 @@ namespace Revifast.Data
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<IdentityUser>().ToTable("Usuario").Property(p => p.Id).HasColumnName("UsuarioId");
+            base.OnModelCreating(builder);
+            builder.Entity<IdentityUser>().ToTable("Usuario").Property(p => p.Id).HasColumnName("UsuarioId");
 
-            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("RolUsuario");
-            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("LoginUsuario");
-            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("ClaimUsuario");
-            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("TokenUsuario");
+            builder.Entity<IdentityUserRole<string>>().ToTable("RolUsuario");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("LoginUsuario");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("ClaimUsuario");
+            builder.Entity<IdentityUserToken<string>>().ToTable("TokenUsuario");
 
-            modelBuilder.Entity<IdentityRole>().ToTable("Rol");
-            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RolClaim");
+            builder.Entity<IdentityRole>().ToTable("Rol");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RolClaim");
         }
     }
 }
