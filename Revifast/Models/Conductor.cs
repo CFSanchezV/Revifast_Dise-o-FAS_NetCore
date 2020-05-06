@@ -12,7 +12,7 @@ namespace Revifast.Models
         {
             Vehiculo = new HashSet<Vehiculo>();
         }
-
+        
         public int ConductorId { get; set; }
 
         public string Usuario { get; set; }

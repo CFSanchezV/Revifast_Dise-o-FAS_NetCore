@@ -21,7 +21,7 @@ namespace Revifast.Models
         [Required(ErrorMessage = "Modelo es requerido")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Modelo requiere entre 3 y 30 caracteres")]
         public string Modelo { get; set; }
-        [Required(ErrorMessage = "Categoria es requerido")]
+        [Required(ErrorMessage = "Categoria es requerida")]
         [StringLength(2, MinimumLength = 2,ErrorMessage = "Categoria requiere 2 caracteres")]
         public string Categoria { get; set; }
 

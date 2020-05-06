@@ -15,9 +15,9 @@ namespace Revifast.Models
         [Display(Name = "Empresa")]
         public int EmpresaId { get; set; }
 
-        //REVISAR AQUI
+        [Required(ErrorMessage = "Fecha y hora son datos requeridos")]
         [Display(Name = "Fecha y Hora")]
-        //[RegularExpression("{0: MM/dd/yy H:mm:ss}")]
+        //[RegularExpression("{0: MM/dd/yy H:mm tt}")]
         public DateTime Fecha { get; set; }
         public string Observaciones { get; set; }
 

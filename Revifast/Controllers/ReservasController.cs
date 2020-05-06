@@ -69,8 +69,8 @@ namespace Revifast.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId", reserva.EmpresaId);
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId", reserva.VehiculoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre", reserva.EmpresaId);
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "Placa", reserva.VehiculoId);
             return View(reserva);
         }
 
@@ -87,8 +87,8 @@ namespace Revifast.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId", reserva.EmpresaId);
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId", reserva.VehiculoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre", reserva.EmpresaId);
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "Placa", reserva.VehiculoId);
             return View(reserva);
         }
 
@@ -124,8 +124,8 @@ namespace Revifast.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "EmpresaId", reserva.EmpresaId);
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoId", reserva.VehiculoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre", reserva.EmpresaId);
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "Placa", reserva.VehiculoId);
             return View(reserva);
         }
 

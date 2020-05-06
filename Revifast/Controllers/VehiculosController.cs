@@ -68,7 +68,7 @@ namespace Revifast.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId", vehiculo.ConductorId);
+            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "Nombres", vehiculo.ConductorId);
             return View(vehiculo);
         }
 
@@ -85,7 +85,7 @@ namespace Revifast.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId", vehiculo.ConductorId);
+            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "Nombres", vehiculo.ConductorId);
             return View(vehiculo);
         }
 
@@ -121,7 +121,7 @@ namespace Revifast.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "ConductorId", vehiculo.ConductorId);
+            ViewData["ConductorId"] = new SelectList(_context.Conductor, "ConductorId", "Nombres", vehiculo.ConductorId);
             return View(vehiculo);
         }
 

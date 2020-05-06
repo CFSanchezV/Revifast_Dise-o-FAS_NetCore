@@ -12,19 +12,19 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Fecha)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Observaciones)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Empresa)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Vehiculo)
             </th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -37,10 +37,10 @@
                 @Html.DisplayFor(modelItem => item.Observaciones)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Empresa.EmpresaId)
+                @Html.DisplayFor(modelItem => item.Empresa.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Vehiculo.VehiculoId)
+                @Html.DisplayFor(modelItem => item.Vehiculo.Placa)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ReservaId">Edit</a> |
