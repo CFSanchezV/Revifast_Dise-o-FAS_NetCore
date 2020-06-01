@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -23,9 +22,10 @@ namespace Revifast.Test
         [TestMethod]
         public void CrearCuenta()
         {
-            var username = "juantopo6";
+            var registerButton = chrome.FindElement(By.CssSelector("a.nav-link.text-white.btn.btn-outline-primary.active"));
+            registerButton.Click();
+            var username = "juantopo7";
             var password = "Abc123456!";
-            chrome.Navigate().GoToUrl("http://localhost:5000/Identity/Account/Register");
             var emailField = chrome.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
             var passwordField = chrome.FindElement(By.Id("Input_Password"));
@@ -46,6 +46,7 @@ namespace Revifast.Test
         public void Cleanup()
         {
             chrome.Quit();
+            chrome.Dispose();
         }
     }
 }
