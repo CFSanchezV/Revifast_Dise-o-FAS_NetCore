@@ -90,7 +90,50 @@ namespace Revifast.Test
             var alertSucess = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/div/div[2]/div[1]"));
             Assert.IsTrue(alertSucess.Displayed);
         }
+        [TestMethod]
+        public void EditarDatosConductor()
+        {
+            // iniciar sesion
+            var btnIngresar = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
+            var username = "juantopo7"; var password = "Abc123456!";
+            var emailField = iexplorer.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = iexplorer.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
 
+            // ir a la vista conductor
+
+            var btnConductor = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[4]/a"));
+            btnConductor.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+
+            // seleccionar registrar datos
+
+            var btnRegistrarDatos = iexplorer.FindElement(By.Id("id-registrar-datos"));
+            btnRegistrarDatos.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+
+            // registra datos
+            var nombre = "Juan";
+            var nombreField = iexplorer.FindElement(By.Id("id-conductor-nombre"));
+            nombreField.SendKeys(nombre);
+            var apellido = "Topos";
+            var apellidoField = iexplorer.FindElement(By.Id("id-conductor-apellido"));
+            apellidoField.SendKeys(apellido);
+            var dni = "01234567";
+            var dniField = iexplorer.FindElement(By.Id("id-conductor-dni"));
+            dniField.SendKeys(dni);
+            var celular = "912345678";
+            var celularField = iexplorer.FindElement(By.Id("id-conductor-celular"));
+            celularField.SendKeys(celular);
+            var btnRegistrar = iexplorer.FindElement(By.Id("id-conductor-btn-registrar"));
+            btnRegistrar.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+        }
         [TestMethod]
         public void CrearVehiculo()
         {
