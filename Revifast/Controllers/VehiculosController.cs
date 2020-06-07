@@ -21,8 +21,10 @@ namespace Revifast.Controllers
         // GET: Vehiculos
         public async Task<IActionResult> Index()
         {
-            var conductor = await _context.Conductor.FirstOrDefaultAsync(c=>c.Usuario == User.Identity.Name);
-            var vehiculos = await _context.Vehiculo.Where(v=>v.ConductorId == conductor.ConductorId).ToListAsync();
+            var conductor = await _context.Conductor.FirstOrDefaultAsync(c => c.Usuario == User.Identity.Name);
+            List<Vehiculo> vehiculos = new List<Vehiculo>();
+            if (conductor != null)
+                vehiculos = await _context.Vehiculo.Where(v => v.ConductorId == conductor.ConductorId).ToListAsync();
             //var dbRevifastContext = _context.Vehiculo.Include(v => v.Conductor);
             return View(vehiculos);
         }

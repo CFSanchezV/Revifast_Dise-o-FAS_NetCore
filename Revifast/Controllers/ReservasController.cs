@@ -50,7 +50,9 @@ namespace Revifast.Controllers
         {
 
             var conductor = _context.Conductor.FirstOrDefault(c => c.Usuario == User.Identity.Name);
-            var vehiculos = _context.Vehiculo.Where(v => v.ConductorId == conductor.ConductorId);
+            List<Vehiculo> vehiculos = new List<Vehiculo>();
+            if (conductor != null)
+                vehiculos = _context.Vehiculo.Where(v => v.ConductorId == conductor.ConductorId).ToList();
             ViewData["VehiculoId"] = new SelectList(vehiculos, "VehiculoId", "Placa");
             ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaId", "Nombre");
             return View();
