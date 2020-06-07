@@ -24,7 +24,7 @@ namespace Revifast.Test
         {
             var registerButton = firefox.FindElement(By.CssSelector("a.nav-link.text-white.btn.btn-outline-primary.active"));
             registerButton.Click();
-            var username = "juantopo7";
+            var username = "juantopo10";
             var password = "Abc123456!";
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
@@ -45,6 +45,7 @@ namespace Revifast.Test
         [TestCleanup]
         public void Cleanup()
         {
+            if (firefox == null) return;
             firefox.Quit();
             firefox.Dispose();
         }
