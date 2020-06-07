@@ -16,7 +16,7 @@ namespace Revifast.Test
         public void Initialize()
         {
             iexplorer = new InternetExplorerDriver();
-            iexplorer.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            iexplorer.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             iexplorer.Manage().Window.Maximize();
             iexplorer.Navigate().GoToUrl("http://localhost:5000");
         }

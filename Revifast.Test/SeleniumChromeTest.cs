@@ -17,7 +17,7 @@ namespace Revifast.Test
         public void Initialize()
         {
             chrome = new ChromeDriver();
-            chrome.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            chrome.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("http://localhost:5000");            
         }
@@ -124,27 +124,8 @@ namespace Revifast.Test
             var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Vehiculos"));
             Assert.IsTrue(chrome.Url == "http://localhost:5000/Vehiculos");
-        }
-        [TestMethod]
-        public void EditarReserva()
-        {
-            // iniciar sesion
-            var btnIngresar = chrome.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
-            btnIngresar.Click();
-            var username = "juantopo9"; var password = "Abc123456!";
-            var emailField = chrome.FindElement(By.Id("Input_Email"));
-            emailField.SendKeys($"{username}@email.com");
-            var passwordField = chrome.FindElement(By.Id("Input_Password"));
-            passwordField.SendKeys(password);
-            var loginButton = chrome.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
-            loginButton.Click();
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            //
-            var btnReserva = chrome.FindElement(By.Id("id-layout-nav-reserva"));
-            btnReserva.Click();
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            //
-        }
+        }     
+
         [TestMethod]
         public void CrearReserva()
         {
@@ -179,6 +160,68 @@ namespace Revifast.Test
             var createBtn = chrome.FindElement(By.XPath("/html/body/div[1]/main/div[1]/div/form/div[5]/input"));
             createBtn.Click();
             
+            Assert.IsTrue(chrome.Url == "http://localhost:5000/Reservas");
+        }
+
+        [TestMethod]
+        public void EditarReserva()
+        {
+            //login
+            var btnIngresar = chrome.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
+            var username = "juantopo7"; var password = "Abc123456!";
+            var emailField = chrome.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = chrome.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = chrome.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+
+            /*reservas*/
+            chrome.Navigate().GoToUrl("http://localhost:5000/Reservas");
+            var EditReservaBtn = chrome.FindElement(By.XPath("/html/body/div[1]/main/table/tbody/tr/td[5]/a[1]"));
+            EditReservaBtn.Click();
+
+            var placaDrDo = chrome.FindElement(By.XPath("//*[@id='VehiculoId']")); //select dropdown list
+            var selectPlaca = new SelectElement(placaDrDo); //create SelectElement object
+            selectPlaca.SelectByText("AFS203"); //or selectPlaca.SelectByValue("2");
+
+            var empresaDrDo = chrome.FindElement(By.XPath("//*[@id='EmpresaId']"));
+            var selectEmpresa = new SelectElement(empresaDrDo);
+            //otra Empresa
+            selectEmpresa.SelectByText("ReviSeguros");
+
+            var dateField = chrome.FindElement(By.XPath("//*[@id='Fecha']"));
+            //mañana
+            DateTime date = DateTime.Now;
+            date = date.AddSeconds(-date.Second); date = date.AddDays(1);
+            dateField.SendKeys(date.ToShortDateString() + "\t" + date.ToShortTimeString());
+
+            var saveBtn = chrome.FindElement(By.XPath("/html/body/div[1]/main/div[1]/div/form/div[5]/input"));
+            saveBtn.Click();
+
+            Assert.IsTrue(chrome.Url == "http://localhost:5000/Reservas");
+        }
+
+        [TestMethod]
+        public void EliminarReserva()
+        {
+            //login
+            var btnIngresar = chrome.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
+            var username = "juantopo7"; var password = "Abc123456!";
+            var emailField = chrome.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = chrome.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = chrome.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+
+            //reserva
+            var DelReservaBtn = chrome.FindElement(By.XPath("/html/body/div[1]/main/table/tbody/tr/td[5]/a[3]"));
+            DelReservaBtn.Click();
+
+            var confirmDelBtn = chrome.FindElement(By.XPath("/html/body/div[1]/main/div/form/input[2]"));
+            confirmDelBtn.Click();
+
             Assert.IsTrue(chrome.Url == "http://localhost:5000/Reservas");
         }
 

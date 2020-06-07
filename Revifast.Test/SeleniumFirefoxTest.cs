@@ -14,7 +14,7 @@ namespace Revifast.Test
         public void Initialize()
         {
             firefox = new FirefoxDriver();
-            firefox.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            firefox.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             firefox.Manage().Window.Maximize();
             firefox.Navigate().GoToUrl("http://localhost:5000");
         }
