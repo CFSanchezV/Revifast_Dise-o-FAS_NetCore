@@ -6,7 +6,7 @@ using OpenQA.Selenium.Chrome;
 namespace Revifast.Test
 {
     [TestClass]
-    public class SeleniumTest
+    public class SeleniumChromeTest
     {
         private IWebDriver chrome;
 
@@ -24,7 +24,7 @@ namespace Revifast.Test
         {
             var registerButton = chrome.FindElement(By.CssSelector("a.nav-link.text-white.btn.btn-outline-primary.active"));
             registerButton.Click();
-            var username = "juantopo7";
+            var username = "juantopo9";
             var password = "Abc123456!";
             var emailField = chrome.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
@@ -45,6 +45,7 @@ namespace Revifast.Test
         [TestCleanup]
         public void Cleanup()
         {
+            if (chrome == null) return;
             chrome.Quit();
             chrome.Dispose();
         }
