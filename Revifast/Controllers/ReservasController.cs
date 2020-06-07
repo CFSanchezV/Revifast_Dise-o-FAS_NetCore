@@ -48,7 +48,6 @@ namespace Revifast.Controllers
         // GET: Reservas/Create
         public IActionResult Create()
         {
-
             var conductor = _context.Conductor.FirstOrDefault(c => c.Usuario == User.Identity.Name);
             List<Vehiculo> vehiculos = new List<Vehiculo>();
             if (conductor != null)

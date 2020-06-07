@@ -125,7 +125,26 @@ namespace Revifast.Test
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Vehiculos"));
             Assert.IsTrue(chrome.Url == "http://localhost:5000/Vehiculos");
         }
-
+        [TestMethod]
+        public void EditarReserva()
+        {
+            // iniciar sesion
+            var btnIngresar = chrome.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
+            var username = "juantopo9"; var password = "Abc123456!";
+            var emailField = chrome.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = chrome.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = chrome.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+            var btnReserva = chrome.FindElement(By.Id("id-layout-nav-reserva"));
+            btnReserva.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+        }
         [TestMethod]
         public void CrearReserva()
         {

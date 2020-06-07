@@ -52,9 +52,13 @@ namespace Revifast.Controllers
         public IActionResult Create()
         {
             Conductor conductor = _context.Conductor.FirstOrDefault(u => u.Usuario == User.Identity.Name);
-            ViewData["ConductorId"] = conductor.ConductorId;
-            ViewData["ConductorNombres"] = conductor.Nombres;
-            return View();
+            if(conductor != null)
+            {
+                ViewData["ConductorId"] = conductor.ConductorId;
+                ViewData["ConductorNombres"] = conductor.Nombres;
+                return View();
+            }
+            return NotFound("Usted debe registrar sus datos antes de registrar un vehículo!");
         }
 
         // POST: Vehiculos/Create
