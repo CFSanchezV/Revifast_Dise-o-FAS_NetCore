@@ -121,7 +121,37 @@ namespace Revifast.Test
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Vehiculos"));
             Assert.IsTrue(firefox.Url == "http://localhost:5000/Vehiculos");
         }
-
+        [TestMethod]
+        public void EditarVehiculo()
+        {
+            // iniciar sesion
+            var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
+            var username = "juantopo10"; var password = "Abc123456!";
+            var emailField = firefox.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = firefox.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = firefox.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+            var vehiculosBtn = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[5]/a"));
+            vehiculosBtn.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+            var btnEdit = firefox.FindElement(By.Id("editar-vehiculo"));
+            btnEdit.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+            var placaField = firefox.FindElement(By.Id("id-placa"));
+            placaField.Clear();
+            string placa = "mod123";
+            placaField.SendKeys(placa);
+            var btnSave = firefox.FindElement(By.Id("id-save-edit"));
+            btnSave.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+        }
         [TestMethod]
         public void CrearReserva()
         {

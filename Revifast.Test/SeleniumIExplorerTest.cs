@@ -121,7 +121,37 @@ namespace Revifast.Test
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Vehiculos"));
             Assert.IsTrue(iexplorer.Url == "http://localhost:5000/Vehiculos");
         }
-
+        [TestMethod]
+        public void EditarVehiculo()
+        {
+            // iniciar sesion
+            var btnIngresar = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
+            var username = "juantopo12"; var password = "Abc123456!";
+            var emailField = iexplorer.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = iexplorer.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+            var vehiculosBtn = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[5]/a"));
+            vehiculosBtn.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+            var btnEdit = iexplorer.FindElement(By.Id("editar-vehiculo"));
+            btnEdit.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            //
+            var placaField = iexplorer.FindElement(By.Id("id-placa"));
+            placaField.Clear();
+            string placa = "mod123";
+            placaField.SendKeys(placa);
+            var btnSave = iexplorer.FindElement(By.Id("id-save-edit"));
+            btnSave.Click();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+        }
         [TestMethod]
         public void CrearReserva()
         {
