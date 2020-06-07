@@ -27,7 +27,7 @@ namespace Revifast.Test
         {
             var registerButton = chrome.FindElement(By.CssSelector("a.nav-link.text-white.btn.btn-outline-primary.active"));
             registerButton.Click();
-            var username = "juantopo9";
+            var username = "juantopo7";
             var password = "Abc123456!";
 
             var emailField = chrome.FindElement(By.Id("Input_Email"));
