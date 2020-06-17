@@ -18,7 +18,7 @@
     "Revifast": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
+      "applicationUrl": "http://localhost:5000;http://*:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
