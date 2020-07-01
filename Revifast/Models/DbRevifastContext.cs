@@ -24,7 +24,7 @@ namespace Revifast.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("DESKTOP-T5IR78P\\PIERO;Database=DbRevifastFASGugz;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer(".;Database=DbRevifastFASGugz;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
 

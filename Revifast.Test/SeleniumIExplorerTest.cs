@@ -61,12 +61,12 @@ namespace Revifast.Test
         }
 
         [TestMethod]
-        public void Editardatos()
+        public void EditarDatosConductor()
         {
-            //login
-            var btnIngresar = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
+            // iniciar sesion
+            var btnIngresar = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
             var username = "juantopo12"; var password = "Abc123456!";
-
             var emailField = iexplorer.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
             var passwordField = iexplorer.FindElement(By.Id("Input_Password"));
@@ -74,21 +74,33 @@ namespace Revifast.Test
             var loginButton = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
             loginButton.Click();
 
-            //editaTelefono
-            var manageAccButton = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[1]/a")); manageAccButton.Click();
+            // ir a la vista conductor
+            var btnConductor = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[4]/a"));
+            btnConductor.Click();
 
-            var phoneNum = "997998993";
-            var phoneField = iexplorer.FindElement(By.XPath("//*[@id='Input_PhoneNumber']"));
-            phoneField.Clear(); phoneField.SendKeys(phoneNum);
+            // seleccionar registrar datos
+            var btnRegistrarDatos = iexplorer.FindElement(By.Id("id-registrar-datos"));
+            btnRegistrarDatos.Click();
 
-            var updateBtn = iexplorer.FindElement(By.XPath("//*[@id='update-profile-button']"));
-            updateBtn.Click();
+            // registra datos
+            var nombre = "Juan";
+            var nombreField = iexplorer.FindElement(By.Id("id-conductor-nombre"));
+            nombreField.SendKeys(nombre);
+            var apellido = "Topos";
+            var apellidoField = iexplorer.FindElement(By.Id("id-conductor-apellido"));
+            apellidoField.SendKeys(apellido);
+            var dni = "01234567";
+            var dniField = iexplorer.FindElement(By.Id("id-conductor-dni"));
+            dniField.SendKeys(dni);
+            var celular = "912345678";
+            var celularField = iexplorer.FindElement(By.Id("id-conductor-celular"));
+            celularField.SendKeys(celular);
+            var btnRegistrar = iexplorer.FindElement(By.Id("id-conductor-btn-registrar"));
+            btnRegistrar.Click();
 
-            var wait = new WebDriverWait(iexplorer, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("/html/body/div[1]/main/div/div/div[2]/div[1]")));
-
-            var alertSucess = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/div/div[2]/div[1]"));
-            Assert.IsTrue(alertSucess.Displayed);
+            var wait = new WebDriverWait(iexplorer, TimeSpan.FromSeconds(5));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Conductores"));
+            Assert.IsTrue(iexplorer.Url == "http://localhost:5000/Conductores");
         }
 
         [TestMethod]
@@ -116,6 +128,38 @@ namespace Revifast.Test
 
             //click crear
             iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div[1]/div/form/div[5]/input")).Click();
+
+            var wait = new WebDriverWait(iexplorer, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Vehiculos"));
+            Assert.IsTrue(iexplorer.Url == "http://localhost:5000/Vehiculos");
+        }
+
+        [TestMethod]
+        public void EditarVehiculo()
+        {
+            // iniciar sesion
+            var btnIngresar = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
+            var username = "juantopo12"; var password = "Abc123456!";
+            var emailField = iexplorer.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = iexplorer.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+
+            var vehiculosBtn = iexplorer.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[5]/a"));
+            vehiculosBtn.Click();
+
+            var btnEdit = iexplorer.FindElement(By.Id("editar-vehiculo"));
+            btnEdit.Click();
+
+            var placaField = iexplorer.FindElement(By.Id("id-placa"));
+            placaField.Clear();
+            string placa = "mod123";
+            placaField.SendKeys(placa);
+            var btnSave = iexplorer.FindElement(By.Id("id-save-edit"));
+            btnSave.Click();
 
             var wait = new WebDriverWait(iexplorer, TimeSpan.FromSeconds(10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Vehiculos"));
@@ -156,6 +200,8 @@ namespace Revifast.Test
             var createBtn = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div[1]/div/form/div[5]/input"));
             createBtn.Click();
 
+            var wait = new WebDriverWait(iexplorer, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Reservas"));
             Assert.IsTrue(iexplorer.Url == "http://localhost:5000/Reservas");
         }
 
@@ -195,6 +241,8 @@ namespace Revifast.Test
             var saveBtn = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div[1]/div/form/div[5]/input"));
             saveBtn.Click();
 
+            var wait = new WebDriverWait(iexplorer, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Reservas"));
             Assert.IsTrue(iexplorer.Url == "http://localhost:5000/Reservas");
         }
 
@@ -211,6 +259,8 @@ namespace Revifast.Test
             var loginButton = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
             loginButton.Click();
 
+            iexplorer.Navigate().GoToUrl("http://localhost:5000/Reservas");
+
             //reserva
             var DelReservaBtn = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/table/tbody/tr/td[5]/a[3]"));
             DelReservaBtn.Click();
@@ -218,6 +268,8 @@ namespace Revifast.Test
             var confirmDelBtn = iexplorer.FindElement(By.XPath("/html/body/div[1]/main/div/form/input[2]"));
             confirmDelBtn.Click();
 
+            var wait = new WebDriverWait(iexplorer, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Reservas"));
             Assert.IsTrue(iexplorer.Url == "http://localhost:5000/Reservas");
         }
 

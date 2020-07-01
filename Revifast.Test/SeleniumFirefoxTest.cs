@@ -26,7 +26,7 @@ namespace Revifast.Test
         {
             var registerButton = firefox.FindElement(By.CssSelector("a.nav-link.text-white.btn.btn-outline-primary.active"));
             registerButton.Click();
-            var username = "juantopo113";
+            var username = "juantopo10";
             var password = "Abc123456!";
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
@@ -45,7 +45,7 @@ namespace Revifast.Test
             var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
             btnIngresar.Click();
 
-            var username = "juantopo113"; var password = "Abc123456!";
+            var username = "juantopo10"; var password = "Abc123456!";
 
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
@@ -55,17 +55,18 @@ namespace Revifast.Test
             var loginButton = firefox.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
             loginButton.Click();
 
+            Thread.Sleep(TimeSpan.FromSeconds(5));
             var usernameLabel = firefox.FindElement(By.CssSelector("a.nav-link.text-light.text-capitalize"));
             Assert.AreEqual($"Hola {username}!".ToLower(), usernameLabel.Text.ToLower());
         }
 
         [TestMethod]
-        public void Editardatos()
+        public void EditarDatosConductor()
         {
-            //login
-            var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
-            var username = "juantopo113"; var password = "Abc123456!";
-
+            // iniciar sesion
+            var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
+            var username = "juantopo10"; var password = "Abc123456!";
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
             var passwordField = firefox.FindElement(By.Id("Input_Password"));
@@ -73,21 +74,33 @@ namespace Revifast.Test
             var loginButton = firefox.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
             loginButton.Click();
 
-            //editaTelefono
-            var manageAccButton = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[1]/a")); manageAccButton.Click();
+            // ir a la vista conductor
+            var btnConductor = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[4]/a"));
+            btnConductor.Click();
 
-            var phoneNum = "997998993";
-            var phoneField = firefox.FindElement(By.XPath("//*[@id='Input_PhoneNumber']"));
-            phoneField.Clear(); phoneField.SendKeys(phoneNum);
+            // seleccionar registrar datos
+            var btnRegistrarDatos = firefox.FindElement(By.Id("id-registrar-datos"));
+            btnRegistrarDatos.Click();
 
-            var updateBtn = firefox.FindElement(By.XPath("//*[@id='update-profile-button']"));
-            updateBtn.Click();
+            // registra datos
+            var nombre = "Juan";
+            var nombreField = firefox.FindElement(By.Id("id-conductor-nombre"));
+            nombreField.SendKeys(nombre);
+            var apellido = "Topos";
+            var apellidoField = firefox.FindElement(By.Id("id-conductor-apellido"));
+            apellidoField.SendKeys(apellido);
+            var dni = "01234567";
+            var dniField = firefox.FindElement(By.Id("id-conductor-dni"));
+            dniField.SendKeys(dni);
+            var celular = "912345678";
+            var celularField = firefox.FindElement(By.Id("id-conductor-celular"));
+            celularField.SendKeys(celular);
+            var btnRegistrar = firefox.FindElement(By.Id("id-conductor-btn-registrar"));
+            btnRegistrar.Click();
 
-            var wait = new WebDriverWait(firefox, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("/html/body/div[1]/main/div/div/div[2]/div[1]")));
-
-            var alertSucess = firefox.FindElement(By.XPath("/html/body/div[1]/main/div/div/div[2]/div[1]"));
-            Assert.IsTrue(alertSucess.Displayed);
+            var wait = new WebDriverWait(firefox, TimeSpan.FromSeconds(5));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Conductores"));
+            Assert.IsTrue(firefox.Url == "http://localhost:5000/Conductores");
         }
 
         [TestMethod]
@@ -95,7 +108,7 @@ namespace Revifast.Test
         {
             //login
             var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
-            var username = "juantopo110"; var password = "Abc123456!";
+            var username = "juantopo10"; var password = "Abc123456!";
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
             var passwordField = firefox.FindElement(By.Id("Input_Password"));
@@ -122,11 +135,43 @@ namespace Revifast.Test
         }
 
         [TestMethod]
+        public void EditarVehiculo()
+        {
+            // iniciar sesion
+            var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a"));
+            btnIngresar.Click();
+            var username = "juantopo10"; var password = "Abc123456!";
+            var emailField = firefox.FindElement(By.Id("Input_Email"));
+            emailField.SendKeys($"{username}@email.com");
+            var passwordField = firefox.FindElement(By.Id("Input_Password"));
+            passwordField.SendKeys(password);
+            var loginButton = firefox.FindElement(By.XPath("/html/body/div[1]/main/div/div[1]/section/form/div[5]/button"));
+            loginButton.Click();
+
+            var vehiculosBtn = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[5]/a"));
+            vehiculosBtn.Click();
+
+            var btnEdit = firefox.FindElement(By.Id("editar-vehiculo"));
+            btnEdit.Click();
+
+            var placaField = firefox.FindElement(By.Id("id-placa"));
+            placaField.Clear();
+            string placa = "mod123";
+            placaField.SendKeys(placa);
+            var btnSave = firefox.FindElement(By.Id("id-save-edit"));
+            btnSave.Click();
+
+            var wait = new WebDriverWait(firefox, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Vehiculos"));
+            Assert.IsTrue(firefox.Url == "http://localhost:5000/Vehiculos");
+        }
+
+        [TestMethod]
         public void CrearReserva()
         {
             //login
             var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
-            var username = "juantopo110"; var password = "Abc123456!";
+            var username = "juantopo10"; var password = "Abc123456!";
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
             var passwordField = firefox.FindElement(By.Id("Input_Password"));
@@ -138,6 +183,14 @@ namespace Revifast.Test
             var reservasBtn = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[2]/li[6]/a"));
             reservasBtn.Click();
 
+            var placaDrDo = firefox.FindElement(By.XPath("//*[@id='VehiculoId']")); //select dropdown list
+            var selectPlaca = new SelectElement(placaDrDo); //create SelectElement object
+            selectPlaca.SelectByText("AFS203"); //or selectPlaca.SelectByValue("2");
+
+            var empresaDrDo = firefox.FindElement(By.XPath("//*[@id='EmpresaId']"));
+            var selectEmpresa = new SelectElement(empresaDrDo);
+            selectEmpresa.SelectByText("Farenet");
+
             //review
             var dateField = firefox.FindElement(By.XPath("//*[@id='Fecha']"));
             DateTime date = DateTime.Now;
@@ -147,6 +200,8 @@ namespace Revifast.Test
             var createBtn = firefox.FindElement(By.XPath("/html/body/div[1]/main/div[1]/div/form/div[5]/input"));
             createBtn.Click();
 
+            var wait = new WebDriverWait(firefox, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Reservas"));
             Assert.IsTrue(firefox.Url == "http://localhost:5000/Reservas");
         }
 
@@ -155,7 +210,7 @@ namespace Revifast.Test
         {
             //login
             var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
-            var username = "juantopo110"; var password = "Abc123456!";
+            var username = "juantopo10"; var password = "Abc123456!";
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
             var passwordField = firefox.FindElement(By.Id("Input_Password"));
@@ -168,14 +223,26 @@ namespace Revifast.Test
             var EditReservaBtn = firefox.FindElement(By.XPath("/html/body/div[1]/main/table/tbody/tr/td[5]/a[1]"));
             EditReservaBtn.Click();
 
+            var placaDrDo = firefox.FindElement(By.XPath("//*[@id='VehiculoId']")); //select dropdown list
+            var selectPlaca = new SelectElement(placaDrDo); //create SelectElement object
+            selectPlaca.SelectByText("AFS203"); //or selectPlaca.SelectByValue("2");
+
             var empresaDrDo = firefox.FindElement(By.XPath("//*[@id='EmpresaId']"));
             var selectEmpresa = new SelectElement(empresaDrDo);
             //otra Empresa
             selectEmpresa.SelectByText("ReviSeguros");
 
+            var dateField = firefox.FindElement(By.XPath("//*[@id='Fecha']"));
+            //mañana
+            DateTime date = DateTime.Now;
+            date = date.AddSeconds(-date.Second); date = date.AddDays(1);
+            dateField.SendKeys(date.ToShortDateString() + "\t" + date.ToShortTimeString());
+
             var saveBtn = firefox.FindElement(By.XPath("/html/body/div[1]/main/div[1]/div/form/div[5]/input"));
             saveBtn.Click();
 
+            var wait = new WebDriverWait(firefox, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:5000/Reservas"));
             Assert.IsTrue(firefox.Url == "http://localhost:5000/Reservas");
         }
 
@@ -184,7 +251,7 @@ namespace Revifast.Test
         {
             //login
             var btnIngresar = firefox.FindElement(By.XPath("/html/body/header/nav/div/div/ul[1]/li[2]/a")); btnIngresar.Click();
-            var username = "juantopo110"; var password = "Abc123456!";
+            var username = "juantopo10"; var password = "Abc123456!";
             var emailField = firefox.FindElement(By.Id("Input_Email"));
             emailField.SendKeys($"{username}@email.com");
             var passwordField = firefox.FindElement(By.Id("Input_Password"));
