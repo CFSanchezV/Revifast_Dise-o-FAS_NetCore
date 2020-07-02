@@ -85,6 +85,9 @@ namespace Revifast.Models
                 entity.Property(e => e.Placa)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+                 entity.Property(e => e.anio)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Conductor)
                     .WithMany(p => p.Vehiculo)
