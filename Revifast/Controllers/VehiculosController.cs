@@ -66,7 +66,7 @@ namespace Revifast.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VehiculoId,anio,ConductorId,Placa,Modelo,Categoria")] Vehiculo vehiculo)
+        public async Task<IActionResult> Create([Bind("VehiculoId,Anio,ConductorId,Placa,Modelo,Categoria")] Vehiculo vehiculo)
         {
             if (ModelState.IsValid)
             {
