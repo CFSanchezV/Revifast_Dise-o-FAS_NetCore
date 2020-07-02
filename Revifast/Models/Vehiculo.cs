@@ -24,6 +24,8 @@ namespace Revifast.Models
         [Required(ErrorMessage = "Categoria es requerida")]
         [StringLength(2, MinimumLength = 2,ErrorMessage = "Categoria requiere 2 caracteres")]
         public string Categoria { get; set; }
+        public string anio{get;set;}
+        
 
 
         public virtual Conductor Conductor { get; set; }
